@@ -43,13 +43,13 @@ jobs:
       - name: Build with Gradle
         run: |
           if [ -f "./gradlew" ]; then
-            ./gradlew build --no-daemon --stacktrace
+            ./gradlew build --info --no-daemon --stacktrace
           else
-            gradle build --no-daemon --stacktrace
+            gradle build --info --no-daemon --stacktrace
           fi
 
       - name: Upload APK Artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v4
         with:
          name: KingPrimeExecutor-APK
          path: app/build/outputs/apk/debug/*.apk
