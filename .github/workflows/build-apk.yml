@@ -23,18 +23,26 @@ jobs:
       run: |
         echo "ANDROID_HOME=/usr/local/lib/android/sdk" >> $GITHUB_ENV
         echo "ANDROID_SDK_ROOT=/usr/local/lib/android/sdk" >> $GITHUB_ENV
-        # Create local.properties to point to the pre-installed SDK
         echo "sdk.dir=/usr/local/lib/android/sdk" > local.properties
 
-    - name: List Installed SDK Packages
+    - name: Install Gradle (if wrapper missing)
       run: |
-        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed
-
-    - name: Make Gradle Wrapper Executable
-      run: chmod +x ./gradlew
+        if [ ! -f "./gradlew" ]; then
+          sudo apt-get update
+          sudo apt-get install -y gradle
+          echo "Using system Gradle"
+        else
+          chmod +x ./gradlew
+          echo "Using Gradle Wrapper"
+        fi
 
     - name: Build with Gradle
-      run: ./gradlew assembleDebug --no-daemon --stacktrace
+      run: |
+        if [ -f "./gradlew" ]; then
+          ./gradlew assembleDebug --no-daemon --stacktrace
+        else
+          gradle assembleDebug --no-daemon --stacktrace
+        fi
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
