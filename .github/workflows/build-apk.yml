@@ -39,9 +39,9 @@ jobs:
     - name: Build with Gradle
       run: |
         if [ -f "./gradlew" ]; then
-          ./gradlew test --debug --no-daemon --stacktrace
+          ./gradlew accessDebug --debug --no-daemon --stacktrace
         else
-          gradle  test --debug --no-daemon --stacktrace
+          gradle  accessDebug --debug --no-daemon --stacktrace
         fi
 
     - name: Upload APK Artifact
