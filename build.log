@@ -1,0 +1,24 @@
+Warning: Unable to set daemon's environment variables to match the client because: 
+  There is no native integration with this operating environment.
+  If the daemon was started with a significantly different environment from the client, and your build 
+  relies on environment variables, you may experience unexpected behavior.
+Calculating task graph as no cached configuration is available for tasks: assembleDebug
+
+[Incubating] Problems report is available at: file:///data/data/com.termux/files/home/KingPrimeExecutor/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Selection failed
+  Task 'assembleDebug' not found in root project 'KingPrimeExecutor' and its subprojects.
+
+* Try:
+> Run gradle tasks to get a list of available tasks.
+> For more on name expansion, please refer to https://docs.gradle.org/9.6.0/userguide/command_line_interface.html#sec:name_abbreviation in the Gradle documentation.
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 6s
+Configuration cache entry stored.
