@@ -43,9 +43,9 @@ jobs:
       - name: Build with Gradle
         run: |
           if [ -f "./gradlew" ]; then
-            ./gradlew build --info --no-daemon --stacktrace
+            ./gradlew build --no-daemon --stacktrace
           else
-            gradle build --info --no-daemon --stacktrace
+            gradle build --no-daemon --stacktrace
           fi
 
       - name: Upload APK Artifact
@@ -53,3 +53,12 @@ jobs:
         with:
          name: KingPrimeExecutor-APK
          path: app/build/outputs/apk/debug/*.apk
+
+      - name: Locate Gradle Build Files
+        run: |
+         find "$GITHUB_WORKSPACE" -type f \
+         \( -name "gradlew" \
+         -o -name "build.gradle" \
+         -o -name "build.gradle.kts" \
+         -o -name "settings.gradle" \
+         -o -name "settings.gradle.kts" \)
