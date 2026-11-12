@@ -3,7 +3,7 @@ name: Build KingPrimeExecutor APK
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -48,8 +48,29 @@ jobs:
             gradle build --no-daemon --stacktrace
           fi
 
+      - name: Find Generated APK
+        run: |
+          echo "Searching for APK files..."
+
+          find "$GITHUB_WORKSPACE" \
+            -type f -name "*.apk" -print
+
+          APK_COUNT=$(find "$GITHUB_WORKSPACE" \
+            -type f -path "*/build/outputs/apk/*" \
+            -name "*.apk" | wc -l)
+
+          if [ "$APK_COUNT" -eq 0 ]; then
+            echo "ERROR: No APK files were generated!"
+            exit 1
+          fi
+
+          echo "Found $APK_COUNT APK file(s)."
+
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-         name: KingPrimeExecutor-APK
-         path: app/build/outputs/apk/*.apk
+          name: KingPrimeExecutor-APK
+          path: |
+            **/build/outputs/apk/**/*.apk
+          if-no-files-found: error
+          retention-days: 7
