@@ -48,11 +48,8 @@ jobs:
             gradle build --no-daemon --stacktrace
           fi
 
-      - name: Upload APK ARTIFACT
-        uses: actions/upload-artifact@v4
-        with:
-          name: Upload APK ARTIFACT
-          path: |
-            app/build/outputs/apk/gradle-9.6.0-bin.zip
-          if-no-files-found: error
-          retention-days: 7
+          - name: Upload APK Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: KingPrimeExecutor-APK
+        path: app/build/outputs/apk/debug/*.apk
