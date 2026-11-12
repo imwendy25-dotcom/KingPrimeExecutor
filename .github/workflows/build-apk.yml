@@ -19,8 +19,16 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v2
+    - name: Setup Android SDK Path
+      run: |
+        echo "ANDROID_HOME=/usr/local/lib/android/sdk" >> $GITHUB_ENV
+        echo "ANDROID_SDK_ROOT=/usr/local/lib/android/sdk" >> $GITHUB_ENV
+        # Create local.properties to point to the pre-installed SDK
+        echo "sdk.dir=/usr/local/lib/android/sdk" > local.properties
+
+    - name: List Installed SDK Packages
+      run: |
+        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed
 
     - name: Make Gradle Wrapper Executable
       run: chmod +x ./gradlew
