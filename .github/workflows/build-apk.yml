@@ -14,7 +14,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Set up JDK 17
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v5
       with:
         java-version: '17'
         distribution: 'temurin'
@@ -39,9 +39,9 @@ jobs:
     - name: Build with Gradle
       run: |
         if [ -f "./gradlew" ]; then
-          ./gradlew test --continue --no-daemon --stacktrace
+          ./gradlew accessDebug --continue --no-daemon --stacktrace
         else
-          gradle test --continue --no-daemon --stacktrace
+          gradle accessDebug --continue --no-daemon --stacktrace
         fi
 
     - name: Upload APK Artifact
