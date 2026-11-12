@@ -53,4 +53,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
          name: KingPrimeExecutor-APK
-         path: app/build/outputs/apk/debug/*.apk
+         path: /home/runner/work/KingPrimeExecutor/KingPrimeExecutor/build/reports/problems/problems-report.html
