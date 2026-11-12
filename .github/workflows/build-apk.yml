@@ -43,9 +43,9 @@ jobs:
       - name: Build with Gradle
         run: |
           if [ -f "./gradlew" ]; then
-            ./gradlew build --path-info --no-daemon --stacktrace
+            ./gradlew build --findpath -no-daemon --stacktrace
           else
-            gradle build --path-info --no-daemon --stacktrace
+            gradle build --findpath --no-daemon --stacktrace
           fi
 
     
